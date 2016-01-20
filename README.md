@@ -6,7 +6,15 @@ By Ben McGaughey of Seltice Systems LLC
 
 Version 0.2 (BETA)
 
+**Why?**
+
+First, mysql_ functions are being deprecated, so it's a necessity to change to mysqli_ functions.
+
+Second, rewriting entire projects may not be an option for many of us.  Possibly due to cost or time.  But having a script that can be included at the top of your exiting script (mysqlibackwards.php), then rename mysql_ functions to mysqlii_ with a find-and-replace tool is a quick solution to the problem.
+
 **It is very important that you properly sanitize your SQL strings and add slashes where appropriate based on your web server's PHP, MySQL, and other server-specific settings to prevent SQL injection, etc.**
+
+**Always make backups of your DATABASE AND SCRIPTS before replacing function names or testing on a live database.**
 
 Currently supported mysql override functions and additional functions:
 
