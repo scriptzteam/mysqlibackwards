@@ -7,7 +7,7 @@ Simple method to convert existing PHP scripts that use mysql_ functions
 to support the new mysqli_ functions
 
 By Seltice Systems LLC
-Version 0.1 (BETA)
+Version 0.2 (BETA)
 
 ##############################################################################
 ##############################################################################
