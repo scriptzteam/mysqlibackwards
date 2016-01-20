@@ -1,8 +1,6 @@
 <?php
 /*
 
-# mysqlibackwards
-
 mysqlibackwards.php
 
 Simple method to convert existing PHP scripts that use mysql_ functions 
@@ -18,25 +16,24 @@ Copyright (c) 2016, Ben McGaughey of Seltice Systems LLC
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
+modification, are permitted provided that the following conditions are met: 
 
-* Redistributions of source code must retain the above copyright notice, this
-  list of conditions and the following disclaimer.
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer. 
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution. 
 
-* Redistributions in binary form must reproduce the above copyright notice,
-  this list of conditions and the following disclaimer in the documentation
-  and/or other materials provided with the distribution.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ##############################################################################
 ##############################################################################
@@ -52,6 +49,8 @@ settings.
 
 // Basic Usage Example:
 
+require_once("mysqlibackwards.php");
+
 $user = "your_username";
 $password = "your_password";
 $global_mysqlibw_dbase = "your_database";
@@ -66,6 +65,7 @@ if (mysqlii_num_rows($res) > 0) {
 	while ($row = mysqlii_fetch_object($res)) {
 		print $row->sName . "<br>";
 	}
+	mysqlii_free_result($res);
 }
 
 print "<br><hr size=1><br>";
@@ -76,6 +76,7 @@ if (mysqlii_num_rows($res) > 0) {
 	while ($row = mysqlii_fetch_array($res)) {
 		print $row['sName'] . "<br>";
 	}
+	mysqlii_free_result($res);
 }
 
 mysqlii_close($global_mysqlibw_db);
@@ -133,9 +134,9 @@ function mysqlii_fetch_array($wres) {
 	return $wres->fetch_assoc();
 }
 
-function mysqlii_free_result($wdb) {
- // Does nothing yet
-
+function mysqlii_free_result($wres) {
+	global $global_mysqlibw_db;
+	mysqli_free_result($wres);
 }
 
 function mysqlii_real_escape_string($string) {
@@ -200,5 +201,6 @@ function mysqlii_insert_id()
 	global $global_mysqlibw_db;
 	return mysqli_insert_id($global_mysqlibw_db);
 }
+
 
 ?>
