@@ -53,11 +53,11 @@ require_once("mysqlibackwards.php");
 
 $user = "your_username";
 $password = "your_password";
-$global_mysqlibw_dbase = "your_database";
+$dbase = "your_database";
 $host = "your_db_host";
 
-$global_mysqlibw_db = mysqlii_connect($host, $user, $password);
-mysqlii_select_db($global_mysqlibw_dbase);
+$db = mysqlii_connect($host, $user, $password);
+mysqlii_select_db($dbase);
 
 $sql = "SELECT * FROM my_table WHERE id='".mysqlii_real_escape_string(($_POST['id']*1))."'";
 $res = mysqlii_query($sql);
@@ -93,7 +93,7 @@ function mysqlii_connect($host,$user,$password) {
 	global $global_mysqlibw_dbase, $global_mysqlibw_user, $global_mysqlibw_password, $global_mysqlibw_host;
 	$global_mysqlibw_host = $host;
 	$global_mysqlibw_user = $user;
-	$global_mysqlibw_password = $password;
+	$global_mysqlibw_password = $password;	
 	return null;
 }
 
