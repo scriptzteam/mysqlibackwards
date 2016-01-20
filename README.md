@@ -14,7 +14,7 @@ Second, rewriting entire projects may not be an option for many of us.  Possibly
 
 **It is very important that you properly sanitize your SQL strings and add slashes where appropriate based on your web server's PHP, MySQL, and other server-specific settings to prevent SQL injection, etc.**
 
-**Always make backups of your DATABASE AND SCRIPTS before replacing function names or testing on a live database.**
+**Always make backups of your DATABASE AND SCRIPTS before replacing function names in your existing scripts or testing on a live database!!!**
 
 Currently supported mysql override functions and additional functions:
 
