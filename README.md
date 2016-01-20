@@ -6,6 +6,8 @@ By Seltice Systems LLC
 
 Version 0.2 (BETA)
 
+**It is very important that you properly sanitize your SQL strings and add slashes where appropriate based on your web server's PHP, MySQL, and other server-specific settings to prevent SQL injection, etc.**
+
 Currently supported mysql override functions and additional functions:
 
 - mysqlii_connect
@@ -23,3 +25,50 @@ Currently supported mysql override functions and additional functions:
 - mysqlii_field_type
 - mysqlii_field_name
 - mysqlii_insert_id
+
+##Example of how I use this script:
+
+*This would be the existing script on one of my old websites:*
+```php
+<?php
+
+$user = "my_username";
+$password = "my_password";
+$dbase = "my_database";
+$host = "my_hostname";
+$db = mysql_connect($host, $user, $password);
+mysql_select_db($dbase);
+$sql = "SELECT * FROM my_table WHERE IsActive=1";
+$res = mysql_query($sql);
+if (mysql_num_rows($res) > 0) {
+	while ($row = mysql_fetch_object($res)) {
+		print $row->fieldName . "<br>";
+	}
+	mysql_free_result($res);
+}
+
+```
+
+*This would by my method to convert the script above to use mysqlibackwards.  Note that all I had to do was change the function names to have mysqlii_ instead of mysql_ and include mysqlibackwards.php:*
+
+```php
+<?php
+
+require_once("mysqlibackwards.php");
+
+$user = "my_username";
+$password = "my_password";
+$dbase = "my_database";
+$host = "my_hostname";
+$db = mysqlii_connect($host, $user, $password);
+mysqlii_select_db($dbase);
+$sql = "SELECT * FROM my_table WHERE IsActive=1";
+$res = mysqlii_query($sql);
+if (mysqlii_num_rows($res) > 0) {
+	while ($row = mysqlii_fetch_object($res)) {
+		print $row->fieldName . "<br>";
+	}
+	mysqlii_free_result($res);
+}
+
+```
