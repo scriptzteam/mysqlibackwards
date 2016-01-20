@@ -1,6 +1,8 @@
 <?php
 /*
 
+# mysqlibackwards
+
 mysqlibackwards.php
 
 Simple method to convert existing PHP scripts that use mysql_ functions 
